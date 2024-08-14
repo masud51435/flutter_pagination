@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   http: ^1.2.2
   get: ^4.6.6
-  flutter_spinkit: ^5.2.1
+  loading_animation_widget: ^1.2.1
 
 dev_dependencies:
   flutter_test:

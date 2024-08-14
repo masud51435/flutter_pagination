@@ -11,7 +11,7 @@ class PaginationController extends GetxController {
 
   RxBool isLoading = false.obs;
   RxList<Products> products = RxList<Products>();
-  RxInt totalProducts = 0.obs;
+  RxInt totalProducts = 500.obs;
 
   @override
   void onInit() {
@@ -34,14 +34,15 @@ class PaginationController extends GetxController {
       isLoading.value = true;
       final response = await http.get(
         Uri.parse(
-          'https://dummyjson.com/products?limit=15&skip=${products.length}&select=title,price,thumbnail',
+          'https://dummyjson.com/products?limit=11&skip=${products.length}&select=title,price,thumbnail',
         ),
       );
       if (response.statusCode == 200) {
         var productItems = jsonDecode(response.body);
         var items = ProductModel.fromJson(productItems);
-        isLoading.value = false;
+
         totalProducts.value = items.total!;
+        isLoading.value = false;
         products.addAll(items.products!);
       }
     } catch (e) {

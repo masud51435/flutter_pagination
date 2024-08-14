@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:pagination/controllers/pagination_controller.dart';
 
 class HomePage extends StatelessWidget {
@@ -22,6 +22,9 @@ class HomePage extends StatelessWidget {
             return Column(
               children: [
                 ListTile(
+                  tileColor: index.isEven
+                      ? Colors.grey.shade100
+                      : Colors.grey.shade200,
                   leading: Text(product.id.toString()),
                   title: Text(product.title ?? 'No Title'),
                   subtitle:
@@ -32,11 +35,11 @@ class HomePage extends StatelessWidget {
                 ),
                 if (index == controller.products.length - 1 &&
                     controller.isLoading.value)
-                  const Padding(
-                    padding: EdgeInsets.all(10),
-                    child: SpinKitThreeBounce(
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: LoadingAnimationWidget.staggeredDotsWave(
                       color: Colors.purple,
-                      size: 40,
+                      size: 60,
                     ),
                   ),
               ],
