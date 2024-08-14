@@ -40,7 +40,6 @@ class PaginationController extends GetxController {
       if (response.statusCode == 200) {
         var productItems = jsonDecode(response.body);
         var items = ProductModel.fromJson(productItems);
-
         totalProducts.value = items.total!;
         isLoading.value = false;
         products.addAll(items.products!);

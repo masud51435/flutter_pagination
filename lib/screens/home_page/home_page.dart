@@ -13,6 +13,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Flutter Pagination'),
         centerTitle: true,
+        backgroundColor: Colors.blueGrey.shade200,
       ),
       body: Obx(
         () => ListView.builder(
