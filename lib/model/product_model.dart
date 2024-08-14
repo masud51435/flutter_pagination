@@ -1,5 +1,3 @@
-
-
 class ProductModel {
   List<Products>? products;
   int? total;
