@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pagination/model/product_model.dart';
@@ -11,21 +10,21 @@ class PaginationController extends GetxController {
   final ScrollController scrollController = ScrollController();
 
   RxBool isLoading = false.obs;
-
   RxList<Products> products = RxList<Products>();
+  RxInt totalProducts = 0.obs;
 
   @override
   void onInit() {
     // TODO: implement onInit
-    getProducts();
     super.onInit();
-
+    getProducts();
     scrollController.addListener(loadMore);
   }
 
   void loadMore() {
     if (scrollController.position.pixels ==
-        scrollController.position.maxScrollExtent) {
+            scrollController.position.maxScrollExtent &&
+        products.length < totalProducts.value) {
       getProducts();
     }
   }
@@ -35,13 +34,14 @@ class PaginationController extends GetxController {
       isLoading.value = true;
       final response = await http.get(
         Uri.parse(
-          'https://dummyjson.com/products?limit=10&skip=${products.length}&select=title,price,thumbnail',
+          'https://dummyjson.com/products?limit=15&skip=${products.length}&select=title,price,thumbnail',
         ),
       );
       if (response.statusCode == 200) {
         var productItems = jsonDecode(response.body);
         var items = ProductModel.fromJson(productItems);
         isLoading.value = false;
+        totalProducts.value = items.total!;
         products.addAll(items.products!);
       }
     } catch (e) {
