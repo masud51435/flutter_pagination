@@ -11,7 +11,8 @@ class HomePage extends StatelessWidget {
     final PaginationController controller = Get.put(PaginationController());
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        title: const Text('Flutter Pagination'),
+        centerTitle: true,
       ),
       body: Obx(
         () => ListView.builder(
