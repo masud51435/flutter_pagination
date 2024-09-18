@@ -34,7 +34,7 @@ class PaginationController extends GetxController {
       isLoading.value = true;
       final response = await http.get(
         Uri.parse(
-          'https://dummyjson.com/products?limit=11&skip=${products.length}&select=title,price,thumbnail',
+          'https://dummyjson.com/products?limit=13&skip=${products.length}&select=title,price,thumbnail',
         ),
       );
       if (response.statusCode == 200) {
